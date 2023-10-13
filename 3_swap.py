@@ -56,6 +56,7 @@ class Scene3(Scene):
                 "=L \\sqrt{P_b}}"
             ).move_to([3,2,0])
         self.play(Write(eqy))
+        self.wait(1)
 
         eqy2 = MathTex(
                 "Y_b",
@@ -63,6 +64,8 @@ class Scene3(Scene):
             ).move_to([3,2,0])
 
         self.play(TransformMatchingTex(eqy, eqy2))
+        self.wait(1)
+
 
         eqy3 = MathTex(
                 "Y_b",
@@ -81,6 +84,8 @@ class Scene3(Scene):
                 "=L", "\\Delta \\sqrt{p}"
             ).move_to([3,1,0])
         self.play(TransformMatchingTex(eqy4, eqy5))
+        self.wait(1)
+
 
         # 同理得到x的关系
         eqx = MathTex(
@@ -88,6 +93,8 @@ class Scene3(Scene):
                 "=L", "\\Delta \\frac{1}{\\sqrt{p}} "
             ).next_to(eqy5, UP)
         self.play(Write(eqx))
+        self.wait(1)
+
         eq_g = Group(eqx, eqy5)
 
         # 整体移动
@@ -95,6 +102,8 @@ class Scene3(Scene):
             Group(ax, curve, area, ax_labels, line).animate.shift(LEFT * 2.5),
             eq_g.animate.scale(0.8).move_to([-2.5, 2, 0])
         )
+        self.wait(1)
+
 
         # 带入数据 举个例子
         self.play(Transform(ax, Axes(
@@ -112,11 +121,15 @@ class Scene3(Scene):
             curve, str(t.get_value()), x_val=t.get_value(), direction=UR, color=WHITE
         ))
         self.play(Create(hline), Create(xlab))
+        self.wait(1)
+
 
         info1 = Tex("ETH = 1800 USDC").move_to([3,3,0]).scale(0.7)
         info2 = Tex("USDC in 1800")
         info2.next_to(info1, DOWN, aligned_edge=LEFT).scale(0.7) # TODO: left
         self.play(Create(info2), Create(info1))
+        self.wait(1)
+
 
         e = eqy5.copy()
         self.play(e.animate.next_to(info2, DOWN * 3))
@@ -128,6 +141,8 @@ class Scene3(Scene):
         self.play(TransformMatchingTex(e, e1))
         self.play(TransformMatchingTex(e1, e2))
         self.play(TransformMatchingTex(e2, e3))
+        self.wait(1)
+
 
         self.play(t.animate.set_value(price + 0.5))
 

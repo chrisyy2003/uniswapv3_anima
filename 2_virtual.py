@@ -90,6 +90,7 @@ class Scene2(Scene):
             "(","X_{virtual}", "+ X_{real})", "\\times", "(","Y_{virtual}", "+ Y_{real}", ")", "= K"
         ).move_to([3,2,0]).scale(0.8)
         self.play(TransformMatchingTex(eq2, eq3))
+        self.wait(1)
 
 
         # virtual具体是多少 由于在这个曲线上, 显然是跟选取的AB两个点相关的，所以我们可以将它表示出来
@@ -97,10 +98,14 @@ class Scene2(Scene):
         x_det_brace = BraceBetweenPoints(ax.c2p(0, k.get_value() / t.get_value()), ax.c2p(4, k.get_value() / t.get_value())).scale(0.8)
         x_det_brace_lab = x_det_brace.get_tex("X_{virtual}")
         self.play(Create(x_det_brace), Create(x_det_brace_lab))
+        self.wait(1)
+
         
         y_det_brace = BraceBetweenPoints(ax.c2p(4, 0), ax.c2p(4, k.get_value() / t.get_value())).scale(0.8)
         y_det_brace_lab = y_det_brace.get_tex("Y_{virtual}")
         self.play(Create(y_det_brace), Create(y_det_brace_lab))
+        self.wait(1)
+
 
         priceA = DashedLine(ax.c2p(0, 0),  ax.c2p(4, k.get_value() / 4))
         labA = Tex("PriceA").next_to(priceA, UP)
@@ -110,6 +115,8 @@ class Scene2(Scene):
         self.play(Create(priceB), Create(labb))
         # 同理这是a的价格
         self.play(Create(priceA), Create(labA), FadeOut(priceB), FadeOut(labb))
+        self.wait(1)
+
 
         eqx1 = MathTex(
                 '''
@@ -144,12 +151,16 @@ class Scene2(Scene):
         self.play(Write(eqx1))
         self.play(TransformMatchingTex(eqx1, eqx2))
         self.play(TransformMatchingTex(eqx2, eqx3))
+        self.wait(1)
+
 
         eqxv = MathTex(
             "(","\\frac{L}{\\sqrt{P_a}}", "+ X_{real})", "\\times", "(","Y_{virtual}", "+ Y_{real}", ")", "= K"
         ).move_to([3,2,0]).scale(0.8)
         self.play(TransformMatchingTex(eq3, eqxv))
         self.play(FadeOut(eqx3))
+        self.wait(1)
+
 
         # 然后同理虚拟y 我们也可以得到B点拿到
 
@@ -192,6 +203,8 @@ class Scene2(Scene):
         ).move_to([3,2,0]).scale(0.8)
         self.play(TransformMatchingTex(eqxv, eqyv))
         self.play(FadeOut(eqy3))
+        self.wait(1)
+
 
 
         # 函数视角变化 并且每个人可以选择不同的区间
@@ -214,6 +227,8 @@ class Scene2(Scene):
         self.play(Create(ax.get_T_label(x_val=8, graph=new_g, label=Tex("A"))))
         self.play(Create(ax.get_vertical_line(ax.c2p(4, 6))))
         self.play(Create(ax.get_T_label(x_val=4, graph=new_g, label=Tex("B"))))
+        self.wait(1)
+
 
         # 对于swap操作
 
@@ -221,9 +236,7 @@ class Scene2(Scene):
         p.add_updater(lambda x: x.move_to(ax.c2p(p_v.get_value(), 6)))
         p_l = ax.get_vertical_line(point=ax.c2p(p_v.get_value(), 6))
         self.play(Create(p), Create(p_l))
-
         self.play(Create(ax.get_T_label(x_val=p_v.get_value(), graph=new_g, label=Tex("Price"))))
-
 
 
 
